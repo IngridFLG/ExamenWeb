@@ -34,7 +34,7 @@ public class Problema {
     @JsonIgnore
     private List<Examen> examenes;
 
-    @OneToMany(mappedBy = "tabla")
+    @OneToMany(mappedBy = "problema")
     @JsonIgnore
     private List<Tabla> tablas;
 }
