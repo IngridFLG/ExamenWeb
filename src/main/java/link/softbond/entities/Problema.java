@@ -2,11 +2,13 @@ package link.softbond.entities;
 
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -28,7 +30,11 @@ public class Problema {
 
     private String nombrebase;
 
-    @ManyToOne
-    @JoinColumn(name = "examen_id")
-    private Examen examen;
+    @OneToMany(mappedBy = "problema")
+    @JsonIgnore
+    private List<Examen> examenes;
+
+    @OneToMany(mappedBy = "tabla")
+    @JsonIgnore
+    private List<Tabla> tablas;
 }

@@ -30,7 +30,7 @@ public class Tabla {
 	private String descripcion;
 	
 	@ManyToOne
-	@JoinColumn(name = "idproblema")
+	@JoinColumn(name = "problema_id")
 	private Problema problema;
 
 }
