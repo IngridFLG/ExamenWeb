@@ -2,10 +2,13 @@ package link.softbond.controller;
 
 
 import link.softbond.entities.Problema;
+import link.softbond.entities.Tabla;
 import link.softbond.repositorios.ProblemaRepository;
 
 import java.util.List;
+import java.util.Optional;
 
+import link.softbond.repositorios.TablaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -24,15 +27,24 @@ public class ProblemaController {
     @Autowired
     ProblemaRepository problemaRepository;
 
+    @Autowired
+    TablaRepository tablaRepository;
+
 
     @GetMapping("/list/activos")
     public List<Problema> listarProblemasActivos(@RequestParam("estado") Integer estado) {
         return problemaRepository.findByEstado(estado);
     }
-    
-    @GetMapping("/list")
-    public List<Problema> listarProblemas(){
-        return problemaRepository.findAll();
 
+    @GetMapping("/list")
+    public List<Problema> listarProblemas() {
+        return problemaRepository.findAll();
+    }
+
+    @GetMapping("{id}/tablas")
+    public List<Tabla> listarProblemasPorTablas(@PathVariable Integer id) {
+        Problema problemas = problemaRepository.findById(id).get();
+        return problemas.getTablas();
     }
 }
+
