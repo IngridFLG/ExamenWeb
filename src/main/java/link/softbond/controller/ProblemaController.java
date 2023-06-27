@@ -2,7 +2,9 @@ package link.softbond.controller;
 
 
 import link.softbond.entities.Problema;
+import link.softbond.entities.Tabla;
 import link.softbond.repositorios.ProblemaRepository;
+import link.softbond.repositorios.TablaRepository;
 
 import java.util.List;
 
@@ -25,6 +27,9 @@ public class ProblemaController {
     ProblemaRepository problemaRepository;
 
 
+    @Autowired
+    TablaRepository tablaRepository;
+    
     @GetMapping("/list/activos")
     public List<Problema> listarProblemasActivos(@RequestParam("estado") Integer estado) {
         return problemaRepository.findByEstado(estado);
@@ -34,5 +39,12 @@ public class ProblemaController {
     public List<Problema> listarProblemas(){
         return problemaRepository.findAll();
 
+    }
+    
+    @GetMapping("/tablas/{tablaId}/datos")
+    public Tabla getDatosTabla(@PathVariable("tablaId") Integer tablaId) {
+    	
+    	return tablaRepository.getReferenceById(tablaId);
+    	
     }
 }
